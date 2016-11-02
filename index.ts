@@ -43,14 +43,21 @@ interface ITempPerson {
   deathDate?: string;
   deathPlace?: string;
   parentFamilyId?: string;
-  ownFamilyIds?: Array<string>;
+  ownFamilyIds: Array<string>;
 }
 
-const persons: Array<ITempPerson> = [];
+interface ITempFamily {
+  id: string,
+  husbandId: string,
+  wifeId: string,
+  children: Array<string>
+}
+
+// const persons: Array<ITempPerson> = [];
 
 fs.readFile('./data/Kennedy.xml', 'utf8', (err, content) => {
   parseString(content, (err, result) => {
-      result.GED.INDI.forEach(personTag => {
+      const persons: Array<ITempPerson> = result.GED.INDI.map(personTag => {
         const id: string = personTag.$.ID;
         const refn:string = !_.isEmpty(personTag.REFN) ? _.head(personTag.REFN).toString() : null;
         const name: string = !_.isEmpty(personTag.NAME) ? _.head(personTag.NAME).toString() : null;
@@ -71,7 +78,7 @@ fs.readFile('./data/Kennedy.xml', 'utf8', (err, content) => {
           ownFamilyIds = ownFamilies.map(ownFamily => ownFamily.$.REF);
         }
 
-        persons.push({
+        return {
           id, 
           refn, 
           name, 
@@ -82,10 +89,24 @@ fs.readFile('./data/Kennedy.xml', 'utf8', (err, content) => {
           deathPlace, 
           parentFamilyId, 
           ownFamilyIds
-        });
+        };
       });
+
+      const families = result.GED.FAM.map(family => {
+        const id = family.$.ID;
+        const husbandId = family.HUSB[0].$.REF;
+        const wifeId = family.WIFE[0].$.REF;
+        const children = (family.CHIL || []).map(child => child.$.REF);
+
+        return {
+          id,
+          husbandId,
+          wifeId,
+          children
+        };
+      });
+
+      console.log(persons);
+      console.log(families);
   });
-
-  console.log(persons);
 });
-
