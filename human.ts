@@ -1,57 +1,38 @@
 import * as _ from 'lodash';
 
-const FIRST_WOMAN = 'Eva';
-const FIRST_MAN = 'Adam';
-
 export enum GENDER {
-    MALE,
-    FEMALE
+  MALE,
+  FEMALE
 }
 
 export interface IHumanDescriptor {
-      name: string;
-      gender: GENDER
+  id: string;
+  name: string;
+  gender: GENDER
 }
 
 export class Human {
-    private children: Array<Human> = [];
+  private children: Array<Human> = [];
+  private father: Human;
+  private mother: Human;
 
-    constructor(
-        private desc: IHumanDescriptor,
-        private father?: Human,
-        private mother?: Human) {
+  constructor(private desc: IHumanDescriptor) {
+  }
+
+  public getId() {
+    return this.desc.id;
+  }
+
+  public setParents(father: Human, mother: Human) {
+    this.father = father;
+    this.mother = mother;
+
+    if (this.father) {
+      this.father.children.push(this);
     }
 
-    public create(): Human {
-      if (this.desc.name !== FIRST_MAN && this.desc.name !== FIRST_WOMAN) {
-        throw Error('This person can not be created! Use traditional approach!');
-      }
-
-      return this.validate();
+    if (this.mother) {
+      this.mother.children.push(this);
     }
-
-    public born(desc: IHumanDescriptor, father: Human): Human {
-      const newHuman = new Human(desc, father, this).validate();
-
-      this.children.push(newHuman);
-
-      return newHuman;
-    }
-
-    private validate(): Human {
-      const issuesTemplates: Array<Function> = [
-          () => !this.desc ? 'wrong information' : null,
-          () => this.father && this.father.desc.gender !== GENDER.MALE ? 'wrong father' : null,
-          () => this.mother && this.mother.desc.gender !== GENDER.FEMALE ? 'wrong mother' : null,
-          () => !this.desc.name ? 'empty name' : null
-      ];
-
-      const issues = issuesTemplates.map(issueFun => issueFun()).filter(issue => !!issue);
-
-      if (!_.isEmpty(issues)) {
-        throw Error(issues.toString());
-      }
-
-      return this;
-    }
+  }
 }
