@@ -1,0 +1,56 @@
+{
+  "Smiths": {
+    "Jonathan Smith": {
+      "id": 0,
+      "wife": [
+        10
+      ]
+    },
+    "Suzan Smith": {
+      "id": 10,
+      "born": "Suzan Jones",
+      "husband": [
+        0
+      ]
+    },
+    "Adam Smith": {
+      "id": 1,
+      "father": 0,
+      "mother": 10
+    },
+    "Suzy Smith": {
+      "id": 4,
+      "father": 1
+    },
+    "Clare Smith": {
+      "id": 5,
+      "father": 1
+    },
+    "Aaron Smith": {
+      "id": 6,
+      "father": 1
+    },
+    "Simon Smith": {
+      "id": 7,
+      "father": 1
+    },
+    "Timmy Smith": {
+      "id": 2,
+      "father": 0,
+      "mother": 10
+    },
+    "Alison Smith": {
+      "id": 3,
+      "father": 0,
+      "mother": 10
+    },
+    "Natasha Smith": {
+      "id": 8,
+      "father": 3
+    },
+    "Zak Smith": {
+      "id": 9,
+      "father": 3
+    }
+  }
+}
