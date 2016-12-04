@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 export enum GENDER {
   MALE,
   FEMALE

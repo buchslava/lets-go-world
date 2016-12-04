@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@types/async": "^2.0.34",
     "@types/fs-extra": "0.0.34",
     "@types/lodash": "^4.14.37",
     "@types/xml2js": "0.0.28",
+    "async": "^2.1.4",
     "fs-extra": "^0.30.0",
     "lodash": "^4.16.4",
     "xml2js": "^0.4.17"

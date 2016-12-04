@@ -1,0 +1,8 @@
+{
+  "items": [
+    {
+      "filePath": "./data/Kennedy.xml",
+      "adapter": "VipDbAdapter"
+    }
+  ]
+}
