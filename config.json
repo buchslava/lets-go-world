@@ -3,6 +3,10 @@
     {
       "filePath": "./data/Kennedy.xml",
       "adapter": "VipDbAdapter"
+    },
+    {
+      "filePath": "./data/Smiths.json",
+      "adapter": "SimpleDbAdapter"
     }
   ]
 }
